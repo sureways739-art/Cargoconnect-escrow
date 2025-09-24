@@ -1,0 +1,596 @@
+`html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargo-Connect - Blockchain Logistics Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@stacks/connect@6.9.2/dist/index.js"></script>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background: rgba(26, 32, 44, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981 0%, #0ea5e9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Main content styles */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: rgba(26, 32, 44, 0.6);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #10b981;
+        }
+        
+        /* Form styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(26, 32, 44, 0.8);
+            color: #e2e8f0;
+            font-size: 16px;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #10b981;
+        }
+        
+        /* Button styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+        }
+        
+        /* Status section */
+        .status-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(26, 32, 44, 0.5);
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+        }
+        
+        .status-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #10b981;
+        }
+        
+        /* Transaction history */
+        .transaction-list {
+            margin-top: 20px;
+        }
+        
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px 0;
+            color: #a0aec0;
+            font-size: 14px;
+        }
+        
+        /* Wallet connection */
+        .wallet-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(16, 185, 129, 0.2);
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background: rgba(26, 32, 44, 0.5);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            background: rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Shipment items */
+        .shipment-item {
+            padding: 15px;
+            background: rgba(26, 32, 44, 0.4);
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .shipment-item h4 {
+            color: #0ea5e9;
+            margin-bottom: 8px;
+        }
+        
+        /* Blockchain status */
+        .blockchain-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 12px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid #10b981;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="sureway-logo.png" alt="Sureway Integrated Technology Solutions" class="logo-img">
+                    <div class="logo-img">SW</div>
+                    <div class="logo-text">Cargo-Connect</div>
+                </div>
+                <div class="wallet-status" id="walletStatus">
+                    <i class="fas fa-wallet"></i>
+                    <span>Wallet not connected</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" data-tab="shipper">Shipper Dashboard</div>
+            <div class="tab" data-tab="transporter">Transporter Dashboard</div>
+        </div>
+
+        <div class="main-content">
+            <!-- Shipper Dashboard -->
+            <div class="card" id="shipperDashboard">
+                <h2 class="card-title"><i class="fas fa-shipping-fast"></i> Create New Shipment</h2>
+                
+                <div class="form-group">
+                    <label for="product">Product Type</label>
+                    <select id="product">
+                        <option value="">Select Product</option>
+                        <option value="flour">FMN Flour</option>
+                        <option value="beverages">Lacasera Beverages</option>
+                        <option value="cement">Dangote Cement</option>
+                        <option value="rice">Olam Rice</option>
+                        <option value="sugar">Sunti Sugar</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fromLocation">From</label>
+                    <input type="text" id="fromLocation" placeholder="e.g., Lagos">
+                </div>
+                
+                <div class="form-group">
+                    <label for="toLocation">To</label>
+                    <input type="text" id="toLocation" placeholder="e.g., Abuja">
+                </div>
+                
+                <div class="form-group">
+                    <label for="amount">Amount (STX)</label>
+                    <input type="number" id="amount" placeholder="e.g., 100">
+                </div>
+                
+                <div class="form-group">
+                    <label for="beneficiary">Transporter Address (Optional)</label>
+                    <input type="text" id="beneficiary" placeholder="STX address starting with 'ST'">
+                </div>
+                
+                <button class="btn btn-primary" onclick="lockFunds()">
+                    <i class="fas fa-lock"></i> Lock Funds in Escrow
+                </button>
+                
+                <div class="status-section">
+                    <h3 class="status-title">Transaction Status</h3>
+                    <p id="transactionStatus">No transactions yet</p>
+                    <p id="transactionId"></p>
+                </div>
+                
+                <div class="blockchain-status">
+                    <i class="fas fa-link"></i>
+                    <span>Powered by Stacks Blockchain - Secured by Bitcoin</span>
+                </div>
+            </div>
+
+            <!-- Transporter Dashboard -->
+            <div class="card" id="transporterDashboard" style="display: none;">
+                <h2 class="card-title"><i class="fas fa-truck"></i> Available Shipments</h2>
+                
+                <div class="form-group">
+                    <label for="searchLocation">Search by Location</label>
+                    <input type="text" id="searchLocation" placeholder="e.g., Lagos to Abuja">
+                </div>
+                
+                <div class="shipment-list">
+                    <div class="shipment-item">
+                        <h4>Lagos to Abuja</h4>
+                        <p>FMN Flour - 20 tons</p>
+                        <p><strong>Reward: 150 STX</strong></p>
+                        <p><small>Posted 2 hours ago</small></p>
+                        <button class="btn btn-secondary" onclick="acceptShipment('Lagos to Abuja', 150)">
+                            <i class="fas fa-handshake"></i> Accept Shipment
+                        </button>
+                    </div>
+                    
+                    <div class="shipment-item">
+                        <h4>Lagos to Kano</h4>
+                        <p>Lacasera Beverages - 15 tons</p>
+                        <p><strong>Reward: 220 STX</strong></p>
+                        <p><small>Posted 5 hours ago</small></p>
+                        <button class="btn btn-secondary" onclick="acceptShipment('Lagos to Kano', 220)">
+                            <i class="fas fa-handshake"></i> Accept Shipment
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="status-section">
+                    <h3 class="status-title">Your Earnings</h3>
+                    <p>Total earned: <strong><span id="totalEarned">0</span> STX</strong></p>
+                    <p>Completed deliveries: <strong><span id="completedDeliveries">0</span></strong></p>
+                </div>
+            </div>
+
+            <!-- Company Information -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-building"></i> About Sureway Integrated Technology Solutions</h2>
+                <p>We are transforming African logistics through blockchain technology, eliminating middlemen and creating direct connections between shippers and transporters.</p>
+                
+                <div style="margin-top: 20px;">
+                    <h3 style="color: #10b981; margin-bottom: 10px;">Our Clients</h3>
+                    <ul style="list-style-type: none;">
+                        <li><i class="fas fa-check-circle" style="color: #10b981;"></i> FMN Flour</li>
+                        <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Lacasera Beverages</li>
+                        <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Dangote Industry</li>
+                        <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Olam Rice</li>
+                        <li><i class="fas fa-check-circle" style="color: #10b981;"></i> Sunti Sugar</li>
+                    </ul>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <h3 style="color: #10b981; margin-bottom: 10px;">Logistics Partners</h3>
+                    <ul style="list-style-type: none;">
+                        <li><i class="fas fa-truck" style="color: #0ea5e9;"></i> EATS Transport Service</li>
+                        <li><i class="fas fa-truck" style="color: #0ea5e9;"></i> Gig Logistics</li>
+                        <li><i class="fas fa-truck" style="color: #0ea5e9;"></i> Lori Technology Logistics</li>
+                        <li><i class="fas fa-truck" style="color: #0ea5e9;"></i> Individual Transporters</li>
+                    </ul>
+                </div>
+                
+                <div class="blockchain-status" style="margin-top: 20px;">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Built on Stacks Blockchain - Secured by Bitcoin</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Sureway Integrated Technology Solutions Ltd. (RC: 8481374)</p>
+            <p>Email: sureways739@gmail.com | Phone: +2348152676740</p>
+            <p>Built for the Stacks Vibe Coding Hackathon</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                document.getElementById('shipperDashboard').style.display = 'none';
+                document.getElementById('transporterDashboard').style.display = 'none';
+                
+                if (tab.dataset.tab === 'shipper') {
+                    document.getElementById('shipperDashboard').style.display = 'block';
+                } else {
+                    document.getElementById('transporterDashboard').style.display = 'block';
+                }
+            });
+        });
+        
+        // Connect Wallet Function
+        async function connectWallet() {
+            try {
+                // Show loading state
+                document.getElementById('walletStatus').innerHTML = 
+                    '<i class="fas fa-spinner fa-spin"></i> Connecting...';
+                
+                // Simulate wallet connection (in real implementation, this would use Stacks.js)
+                setTimeout(() => {
+                    document.getElementById('walletStatus').innerHTML = 
+                        '<i class="fas fa-wallet" style="color: #10b981;"></i> Wallet connected';
+                    
+                    // Show success message
+                    showNotification('Wallet connected successfully!', 'success');
+                }, 1500);
+                
+            } catch (error) {
+                document.getElementById('walletStatus').innerHTML = 
+                    '<i class="fas fa-wallet"></i> Wallet not connected';
+                showNotification('Error connecting wallet: ' + error.message, 'error');
+            }
+        }
+        
+        // Lock Funds Function
+        async function lockFunds() {
+            try {
+                const amount = document.getElementById('amount').value;
+                const fromLocation = document.getElementById('fromLocation').value;
+                const toLocation = document.getElementById('toLocation').value;
+                const product = document.getElementById('product').value;
+                const beneficiary = document.getElementById('beneficiary').value;
+                
+                if (!amount || !fromLocation || !toLocation || !product) {
+                    showNotification('Please fill all required fields', 'error');
+                    return;
+                }
+                
+                // Show loading state
+                document.getElementById('transactionStatus').textContent = 
+                    'Processing transaction on blockchain...';
+                document.getElementById('transactionStatus').style.color = '#d69e2e';
+                
+                // Simulate blockchain transaction (replace with actual Stacks.js code)
+                setTimeout(() => {
+                    const txId = '0x' + Math.random().toString(16).substr(2, 64);
+                    
+                    document.getElementById('transactionStatus').innerHTML = 
+                        '<i class="fas fa-check-circle"></i> Funds locked in escrow successfully!';
+                    document.getElementById('transactionStatus').style.color = '#10b981';
+                    
+                    document.getElementById('transactionId').innerHTML = 
+                        `Transaction ID: <span style="font-family: monospace; color: #0ea5e9;">${txId}</span>`;
+                    
+                    // Add to transaction history
+                    addTransactionToHistory(fromLocation, toLocation, product, amount, txId);
+                    
+                    showNotification('Funds locked successfully! Transaction confirmed on blockchain.', 'success');
+                }, 3000);
+                
+            } catch (error) {
+                document.getElementById('transactionStatus').textContent = 
+                    'Error: ' + error.message;
+                document.getElementById('transactionStatus').style.color = '#e53e3e';
+                showNotification('Error processing transaction: ' + error.message, 'error');
+            }
+        }
+        
+        // Accept Shipment Function
+        function acceptShipment(route, reward) {
+            if (confirm(`Accept shipment: ${route} for ${reward} STX?`)) {
+                // Update earnings
+                const currentEarnings = parseInt(document.getElementById('totalEarned').textContent);
+                const currentDeliveries = parseInt(document.getElementById('completedDeliveries').textContent);
+                
+                document.getElementById('totalEarned').textContent = currentEarnings + reward;
+                document.getElementById('completedDeliveries').textContent = currentDeliveries + 1;
+                
+                showNotification(`Shipment accepted! You will earn ${reward} STX upon delivery.`, 'success');
+            }
+        }
+        
+        // Add transaction to history
+        function addTransactionToHistory(from, to, product, amount, txId) {
+            const transactionItem = document.createElement('div');
+            transactionItem.className = 'transaction-item';
+            transactionItem.innerHTML = `
+                <div>
+                    <strong>${from} to ${to}</strong>
+                    <p>${product} - ${amount} STX</p>
+                </div>
+                <div style="color: #10b981;">
+                    <i class="fas fa-check-circle"></i> Completed
+                </div>
+            `;
+            
+            // Create transaction list if it doesn't exist
+            if (!document.querySelector('.transaction-list')) {
+                const statusSection = document.querySelector('.status-section');
+                const transactionList = document.createElement('div');
+                transactionList.className = 'transaction-list';
+                statusSection.appendChild(transactionList);
+            }
+            
+            document.querySelector('.transaction-list').prepend(transactionItem);
+        }
+        
+        // Show notification
+        function showNotification(message, type) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.position = 'fixed';
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.padding = '15px 20px';
+            notification.style.borderRadius = '8px';
+            notification.style.color = 'white';
+            notification.style.zIndex = '1000';
+            notification.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            notification.style.maxWidth = '350px';
+            
+            if (type === 'success') {
+                notification.style.background = '#10b981';
+            } else {
+                notification.style.background = '#e53e3e';
+            }
+            
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 5 seconds
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 5000);
+        }
+        
+        // Auto connect wallet on page load
+        window.addEventListener('load', () => {
+            // Check if wallet is already connected
+            const isConnected = localStorage.getItem('walletConnected');
+            
+            if (isConnected) {
+                document.getElementById('walletStatus').innerHTML = 
+                    '<i class="fas fa-wallet" style="color: #10b981;"></i> Wallet connected';
+            }
+            
+            // Simulate checking blockchain connection
+            setTimeout(() => {
+                showNotification('Connected to Stacks blockchain network', 'success');
+            }, 2000);
+        });
+        
+        // Save wallet connection state
+        function saveWalletState(connected) {
+            localStorage.setItem('walletConnected', connected);
+        }
+    </script>
+</body>
+</html>
+```
