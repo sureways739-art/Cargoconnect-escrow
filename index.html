@@ -1,4 +1,4 @@
-`html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -406,7 +406,8 @@
             <p>Built for the Stacks Vibe Coding Hackathon</p>
         </div>
     </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/@stacks/stacks.js@latest/dist/bundle.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stacks/connect@latest/dist/bundle.umd.js"></script>
     <script>
         // Tab functionality
         document.querySelectorAll('.tab').forEach(tab => {
@@ -466,7 +467,7 @@
                 document.getElementById('transactionStatus').textContent = 
                     'Processing transaction on blockchain...';
                 document.getElementById('transactionStatus').style.color = '#d69e2e';
-                
+                go
                 // Simulate blockchain transaction (replace with actual Stacks.js code)
                 setTimeout(() => {
                     const txId = '0x' + Math.random().toString(16).substr(2, 64);
@@ -589,7 +590,174 @@
         // Save wallet connection state
         function saveWalletState(connected) {
             localStorage.setItem('walletConnected', connected);
+        } let userSession = null;
+let isConnected = false;
+
+// Initialize Stacks when page loads
+function initStacks() {
+    const appConfig = new Stacks.AppConfig(['store_write', 'publish_data']);
+    userSession = new Stacks.UserSession({ appConfig });
+    
+    // Check if user is already connected
+    if (userSession.isUserSignedIn()) {
+        handleConnectedWallet();
+    }
+}
+
+// Connect Wallet Function
+async function connectWallet() {
+    try {
+        showNotification('🔗 Connecting to Stacks Wallet...', 'info');
+        
+        const appConfig = new Stacks.AppConfig(['publish_data', 'store_write']);
+        userSession = new Stacks.UserSession({ appConfig });
+        
+        if (!userSession.isUserSignedIn()) {
+            // Redirect to authentication
+            userSession.redirectToSignIn();
+        } else {
+            handleConnectedWallet();
         }
+        
+    } catch (error) {
+        console.error('Wallet connection error:', error);
+        showNotification('❌ Wallet connection failed', 'error');
+    }
+}
+
+// Handle successful connection
+function handleConnectedWallet() {
+    isConnected = true;
+    const userData = userSession.loadUserData();
+    
+    // Update UI
+    document.getElementById('user-address').textContent = 
+        userData.profile.stxAddress.testnet.slice(0, 8) + '...' + 
+        userData.profile.stxAddress.testnet.slice(-8);
+    
+    document.getElementById('wallet-info').style.display = 'block';
+    document.getElementById('transaction-section').style.display = 'block';
+    document.getElementById('status-text').innerHTML = '🟢 Connected';
+    document.querySelector('.status-dot').style.backgroundColor = '#00d4aa';
+    
+    showNotification('✅ Wallet connected successfully!', 'success');
+    fetchBalance(userData.profile.stxAddress.testnet);
+    
+    // Enable all transaction buttons on the page
+    enableTransactionButtons();
+}
+
+// Disconnect Wallet
+function disconnectWallet() {
+    if (userSession) {
+        userSession.signUserOut();
+    }
+    isConnected = false;
+    
+    document.getElementById('wallet-info').style.display = 'none';
+    document.getElementById('transaction-section').style.display = 'none';
+    document.getElementById('status-text').innerHTML = '🔴 Disconnected';
+    document.querySelector('.status-dot').style.backgroundColor = '#ff6b6b';
+    
+    showNotification('👋 Wallet disconnected', 'info');
+}
+
+// Fetch STX Balance
+async function fetchBalance(address) {
+    try {
+        const url = `https://stacks-node-api.testnet.stacks.co/extended/v1/address/${address}/stx`;
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        const balance = data.balance / 1000000; // Convert from microstacks
+        document.getElementById('user-balance').textContent = balance.toFixed(2);
+        
+    } catch (error) {
+        console.error('Balance fetch error:', error);
+    }
+}
+
+// Enable transaction buttons after wallet connection
+function enableTransactionButtons() {
+    const buttons = document.querySelectorAll('.btn-success, .btn-primary');
+    buttons.forEach(btn => {
+        btn.style.opacity = '1';
+        btn.style.cursor = 'pointer';
+        btn.onclick = function() {
+            if (!isConnected) {
+                showNotification('Please connect your wallet first!', 'error');
+                return false;
+            }
+            return true;
+        };
+    });
+}
+
+// Simulate Payment Transaction
+async function simulatePayment() {
+    if (!isConnected) {
+        showNotification('Please connect your wallet first!', 'error');
+        return;
+    }
+
+    showNotification('⏳ Processing payment transaction...', 'info');
+    
+    // Simulate blockchain transaction (2-3 seconds)
+    await new Promise(resolve => setTimeout(resolve, 2500));
+    
+    showNotification('✅ Payment transaction completed!', 'success');
+}
+
+// Simulate Shipment Transaction
+async function simulateShipment() {
+    if (!isConnected) {
+        showNotification('Please connect your wallet first!', 'error');
+        return;
+    }
+
+    showNotification('⏳ Creating shipment contract...', 'info');
+    
+    // Simulate blockchain transaction (2-3 seconds)
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    
+    showNotification('✅ Shipment contract deployed!', 'success');
+}
+
+// Connect existing buttons to Stacks
+function connectExistingButtons() {
+    // Connect Release Payment buttons
+    const releaseButtons = document.querySelectorAll('.btn-success');
+    releaseButtons.forEach(btn => {
+        btn.onclick = function() {
+            if (!isConnected) {
+                showNotification('Please connect your wallet first!', 'error');
+                return false;
+            }
+            simulatePayment();
+            return false;
+        };
+    });
+    
+    // Connect Create Shipment buttons
+    const createButtons = document.querySelectorAll('.btn-primary');
+    createButtons.forEach(btn => {
+        btn.onclick = function() {
+            if (!isConnected) {
+                showNotification('Please connect your wallet first!', 'error');
+                return false;
+            }
+            simulateShipment();
+            return false;
+        };
+    });
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    initStacks();
+    connectExistingButtons();
+});
+```
     </script>
 </body>
 </html>
