@@ -463,9 +463,9 @@
                 <div class="logo-text">Sureway Logistics</div>
             </div>
             <ul class="nav-links">
-                <li><a href="#dashboard">Dashboard</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#about" onclick="showAbout()">About</a></li>
+    <li><a href="#contact" onclick="showContact()">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -601,174 +601,200 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@stacks/stacks.js@latest/dist/bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@stacks/connect@latest/dist/bundle.umd.js"></script>
+    // ===== NOTIFICATION SYSTEM =====
+function showNotification(message, type) {
+    const notification = document.getElementById('notification');
+    const notificationText = document.getElementById('notification-text');
+    
+    notificationText.textContent = message;
+    notification.className = `notification ${type} show`;
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 5000);
+}
 
-    <script>
-        // ===== NOTIFICATION SYSTEM =====
-        function showNotification(message, type) {
-            const notification = document.getElementById('notification');
-            const notificationText = document.getElementById('notification-text');
-            
-            notificationText.textContent = message;
-            notification.className = `notification ${type} show`;
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 5000);
+// ===== NAVIGATION FUNCTIONS =====
+function showAbout() {
+    showNotification('🚀 Sureway Logistics: Transforming African supply chains with blockchain technology', 'info');
+}
+
+function showContact() {
+    showNotification('📞 Contact: surewaylogistics@email.com | +234 XXX XXX XXXX', 'info');
+}
+
+// ===== DASHBOARD FUNCTIONALITY =====
+function switchTab(tabName) {
+    // Update tab buttons
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    // Update tab content
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.getElementById(`${tabName}-tab`).classList.add('active');
+}
+
+// ===== SHIPPER FUNCTIONS =====
+function createShipment() {
+    const origin = document.getElementById('origin').value;
+    const destination = document.getElementById('destination').value;
+    const value = document.getElementById('cargo-value').value;
+    
+    if (!origin || !destination || !value) {
+        showNotification('Please fill all fields', 'error');
+        return;
+    }
+    
+    showNotification(`✅ Shipment created from ${origin} to ${destination} for ${value} STX`, 'success');
+    
+    // Clear form
+    document.getElementById('origin').value = '';
+    document.getElementById('destination').value = '';
+    document.getElementById('cargo-value').value = '';
+}
+
+function lockFunds(shipmentId) {
+    showNotification(`💰 Funds locked for ${shipmentId} - Ready for transporter bidding`, 'success');
+}
+
+// ===== TRANSPORTER FUNCTIONS =====
+function placeBid(shipmentId) {
+    showNotification(`✅ Bid placed for ${shipmentId} - Waiting for shipper approval`, 'success');
+}
+
+function updateStatus(shipmentId) {
+    showNotification(`📦 Status updated for ${shipmentId} - In transit (50% completed)`, 'success');
+}
+
+// ===== STACKS BLOCKCHAIN INTEGRATION =====
+let userSession = null;
+let isConnected = false;
+
+function initStacks() {
+    try {
+        // Check if Stacks library is loaded
+        if (typeof Stacks === 'undefined') {
+            console.error('Stacks library not loaded');
+            return;
         }
-
-        // ===== DASHBOARD FUNCTIONALITY =====
-        function switchTab(tabName) {
-            // Update tab buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Update tab content
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById(`${tabName}-tab`).classList.add('active');
+        
+        const appConfig = new Stacks.AppConfig(['store_write', 'publish_data']);
+        userSession = new Stacks.UserSession({ appConfig });
+        
+        if (userSession.isUserSignedIn()) {
+            handleConnectedWallet();
         }
+    } catch (error) {
+        console.error('Stacks initialization error:', error);
+    }
+}
 
-        // ===== SHIPPER FUNCTIONS =====
-        function createShipment() {
-            const origin = document.getElementById('origin').value;
-            const destination = document.getElementById('destination').value;
-            const value = document.getElementById('cargo-value').value;
-            
-            if (!origin || !destination || !value) {
-                showNotification('Please fill all fields', 'error');
-                return;
-            }
-            
-            showNotification(`Shipment created from ${origin} to ${destination} for ${value} STX`, 'success');
-            
-            // Clear form
-            document.getElementById('origin').value = '';
-            document.getElementById('destination').value = '';
-            document.getElementById('cargo-value').value = '';
-        }
+async function connectWallet() {
+    try {
+        showNotification('🔗 Connecting to Stacks Wallet...', 'info');
+        
+        // Add delay to show notification
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // For demo purposes - simulate successful connection
+        // In real implementation, this would redirect to Hiro Wallet
+        simulateWalletConnection();
+        
+    } catch (error) {
+        console.error('Wallet connection error:', error);
+        showNotification('❌ Wallet connection failed - Using demo mode', 'error');
+        // Fallback to demo mode
+        simulateWalletConnection();
+    }
+}
 
-        function lockFunds(shipmentId) {
-            showNotification(`Funds locked for ${shipmentId}`, 'success');
-        }
+// Simulate wallet connection for demo
+function simulateWalletConnection() {
+    isConnected = true;
+    
+    // Demo wallet address (testnet)
+    const demoAddress = 'SP3ABC123...XYZ789';
+    const demoBalance = '125.50';
+    
+    document.getElementById('user-address').textContent = demoAddress;
+    document.getElementById('user-balance').textContent = demoBalance;
+    document.getElementById('wallet-info').style.display = 'block';
+    document.getElementById('transaction-section').style.display = 'block';
+    document.getElementById('status-text').innerHTML = '🟢 Connected (Demo Mode)';
+    document.querySelector('.status-dot').style.backgroundColor = '#00d4aa';
+    
+    showNotification('✅ Wallet connected successfully! (Demo Mode)', 'success');
+}
 
-        // ===== TRANSPORTER FUNCTIONS =====
-        function placeBid(shipmentId) {
-            showNotification(`Bid placed for ${shipmentId}`, 'success');
-        }
+function disconnectWallet() {
+    isConnected = false;
+    
+    document.getElementById('wallet-info').style.display = 'none';
+    document.getElementById('transaction-section').style.display = 'none';
+    document.getElementById('status-text').innerHTML = '🔴 Disconnected';
+    document.querySelector('.status-dot').style.backgroundColor = '#ff6b6b';
+    
+    showNotification('👋 Wallet disconnected', 'info');
+}
 
-        function updateStatus(shipmentId) {
-            showNotification(`Status updated for ${shipmentId}`, 'success');
-        }
+// Simulate balance fetch
+async function fetchBalance(address) {
+    try {
+        // Demo balance - in real implementation, this would fetch from Stacks API
+        const demoBalance = (Math.random() * 1000).toFixed(2);
+        document.getElementById('user-balance').textContent = demoBalance;
+    } catch (error) {
+        console.error('Balance fetch error:', error);
+    }
+}
 
-        // ===== STACKS BLOCKCHAIN INTEGRATION =====
-        let userSession = null;
-        let isConnected = false;
+async function simulatePayment() {
+    if (!isConnected) {
+        showNotification('Please connect your wallet first!', 'error');
+        return;
+    }
 
-        function initStacks() {
-            const appConfig = new Stacks.AppConfig(['store_write', 'publish_data']);
-            userSession = new Stacks.UserSession({ appConfig });
-            
-            if (userSession.isUserSignedIn()) {
-                handleConnectedWallet();
-            }
-        }
+    showNotification('⏳ Processing payment transaction on blockchain...', 'info');
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    showNotification('✅ Payment transaction completed! TX: 0xABC123...', 'success');
+}
 
-        async function connectWallet() {
-            try {
-                showNotification('🔗 Connecting to Stacks Wallet...', 'info');
-                
-                const appConfig = new Stacks.AppConfig(['publish_data', 'store_write']);
-                userSession = new Stacks.UserSession({ appConfig });
-                
-                if (!userSession.isUserSignedIn()) {
-                    userSession.redirectToSignIn();
-                } else {
-                    handleConnectedWallet();
-                }
-                
-            } catch (error) {
-                console.error('Wallet connection error:', error);
-                showNotification('❌ Wallet connection failed', 'error');
-            }
-        }
+async function simulateShipment() {
+    if (!isConnected) {
+        showNotification('Please connect your wallet first!', 'error');
+        return;
+    }
 
-        function handleConnectedWallet() {
-            isConnected = true;
-            const userData = userSession.loadUserData();
-            
-            document.getElementById('user-address').textContent = 
-                userData.profile.stxAddress.testnet.slice(0, 8) + '...' + 
-                userData.profile.stxAddress.testnet.slice(-8);
-            
-            document.getElementById('wallet-info').style.display = 'block';
-            document.getElementById('transaction-section').style.display = 'block';
-            document.getElementById('status-text').innerHTML = '🟢 Connected';
-            document.querySelector('.status-dot').style.backgroundColor = '#00d4aa';
-            
-            showNotification('✅ Wallet connected successfully!', 'success');
-            fetchBalance(userData.profile.stxAddress.testnet);
-        }
+    showNotification('⏳ Creating smart contract for shipment...', 'info');
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    showNotification('✅ Shipment contract deployed! Address: 0xDEF456...', 'success');
+}
 
-        function disconnectWallet() {
-            if (userSession) {
-                userSession.signUserOut();
-            }
-            isConnected = false;
-            
-            document.getElementById('wallet-info').style.display = 'none';
-            document.getElementById('transaction-section').style.display = 'none';
-            document.getElementById('status-text').innerHTML = '🔴 Disconnected';
-            document.querySelector('.status-dot').style.backgroundColor = '#ff6b6b';
-            
-            showNotification('👋 Wallet disconnected', 'info');
-        }
+// ===== ENHANCED NAVIGATION =====
+// Update your navigation HTML to include onclick events:
+// <li><a href="#about" onclick="showAbout()">About</a></li>
+// <li><a href="#contact" onclick="showContact()">Contact</a></li>
 
-        async function fetchBalance(address) {
-            try {
-                const url = `https://stacks-node-api.testnet.stacks.co/extended/v1/address/${address}/stx`;
-                const response = await fetch(url);
-                const data = await response.json();
-                
-                const balance = data.balance / 1000000;
-                document.getElementById('user-balance').textContent = balance.toFixed(2);
-                
-            } catch (error) {
-                console.error('Balance fetch error:', error);
-            }
-        }
-
-        async function simulatePayment() {
-            if (!isConnected) {
-                showNotification('Please connect your wallet first!', 'error');
-                return;
-            }
-
-            showNotification('⏳ Processing payment transaction...', 'info');
-            await new Promise(resolve => setTimeout(resolve, 2500));
-            showNotification('✅ Payment transaction completed!', 'success');
-        }
-
-        async function simulateShipment() {
-            if (!isConnected) {
-                showNotification('Please connect your wallet first!', 'error');
-                return;
-            }
-
-            showNotification('⏳ Creating shipment contract...', 'info');
-            await new Promise(resolve => setTimeout(resolve, 3000));
-            showNotification('✅ Shipment contract deployed!', 'success');
-        }
-
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            initStacks();
-            showNotification('Welcome to Sureway Logistics Platform!', 'info');
-        });
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    initStacks();
+    showNotification('Welcome to Sureway Logistics Platform!', 'info');
+    
+    // Add click events to navigation links
+    document.querySelector('a[href="#about"]').addEventListener('click', function(e) {
+        e.preventDefault();
+        showAbout();
+    });
+    
+    document.querySelector('a[href="#contact"]').addEventListener('click', function(e) {
+        e.preventDefault();
+        showContact();
+    });
+});
     </script>
 </body>
 </html>
