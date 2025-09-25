@@ -3,29 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sureway Logistics - Blockchain-Powered Supply Chain Platform</title>
+    <title>Sureway Logistics - Blockchain Supply Chain Platform</title>
     <style>
-        /* ===== RESET & BASE STYLES ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            color: #333;
         }
 
-        /* ===== HEADER & NAVIGATION ===== */
+        /* Header Styles */
         header {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -61,7 +58,6 @@
         .logo-text {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #333;
         }
 
         .nav-links {
@@ -74,28 +70,31 @@
             text-decoration: none;
             color: #333;
             font-weight: 500;
-            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: #667eea;
+            background: #667eea;
+            color: white;
         }
 
-        /* ===== MAIN CONTAINER ===== */
+        /* Main Container */
         .container {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
 
-        /* ===== HERO SECTION ===== */
+        /* Hero Section */
         .hero {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             padding: 3rem;
             text-align: center;
             margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         .hero h1 {
@@ -106,133 +105,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 2rem;
-        }
-
-        /* ===== DASHBOARD SECTION ===== */
-        .dashboard-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .dashboard-tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid #eee;
-        }
-
-        .tab-btn {
-            padding: 1rem 2rem;
-            border: none;
-            background: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-        }
-
-        .tab-btn.active {
-            color: #667eea;
-            border-bottom-color: #667eea;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ===== FORM STYLES ===== */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #555;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #eee;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        /* ===== BUTTON STYLES ===== */
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #00d4aa 0%, #00b894 100%);
-            color: white;
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 212, 170, 0.4);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
-            color: white;
-        }
-
-        .btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-        }
-
-        /* ===== WALLET SECTION STYLES ===== */
+        /* Wallet Section */
         .wallet-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 2rem;
@@ -252,22 +125,14 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background-color: #ff6b6b;
+            background: #ff6b6b;
             margin-right: 10px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
         }
 
         .wallet-buttons {
             display: flex;
             gap: 1rem;
             margin-bottom: 1.5rem;
-            flex-wrap: wrap;
         }
 
         .wallet-btn {
@@ -278,177 +143,135 @@
             cursor: pointer;
             transition: all 0.3s ease;
             flex: 1;
-            min-width: 150px;
         }
 
-        .hiro-btn {
-            background: #ff6b35;
-            color: white;
-        }
-
-        .disconnect-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            backdrop-filter: blur(10px);
-        }
+        .connect-btn { background: #00d4aa; color: white; }
+        .disconnect-btn { background: rgba(255,255,255,0.2); color: white; }
 
         .wallet-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .wallet-info, .transaction-section {
-            background: rgba(255, 255, 255, 0.1);
+        .wallet-info {
+            background: rgba(255,255,255,0.1);
             padding: 1.5rem;
             border-radius: 10px;
             margin-top: 1rem;
-            backdrop-filter: blur(10px);
+            display: none;
         }
 
-        .tx-btn {
-            background: #00d4aa;
-            color: white;
+        /* Dashboard Styles */
+        .dashboard {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .tab {
+            padding: 1rem 2rem;
             border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
+            background: none;
+            font-size: 1.1rem;
             cursor: pointer;
-            margin: 0.5rem;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
             font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .tx-btn:hover {
-            background: #00b894;
-            transform: translateY(-1px);
+        .btn-primary {
+            background: #667eea;
+            color: white;
         }
 
-        /* ===== NOTIFICATION STYLES ===== */
+        .btn-primary:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+
+        /* Notification */
         .notification {
             position: fixed;
-            top: 100px;
-            right: 2rem;
+            top: 20px;
+            right: 20px;
             padding: 1rem 1.5rem;
             border-radius: 10px;
             color: white;
             font-weight: 500;
-            z-index: 1001;
+            z-index: 1000;
             transform: translateX(400px);
             transition: transform 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .notification.show {
             transform: translateX(0);
         }
 
-        .notification.success {
-            background: #00d4aa;
-        }
+        .notification.success { background: #00d4aa; }
+        .notification.error { background: #ff6b6b; }
+        .notification.info { background: #667eea; }
 
-        .notification.error {
-            background: #ff6b6b;
-        }
-
-        .notification.info {
-            background: #667eea;
-        }
-
-        /* ===== SHIPMENT LIST STYLES ===== */
-        .shipment-list {
-            display: grid;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .shipment-card {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
-        }
-
-        .shipment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .shipment-id {
-            font-weight: bold;
-            color: #667eea;
-        }
-
-        .shipment-status {
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .status-pending { background: #fff3cd; color: #856404; }
-        .status-in-transit { background: #cce7ff; color: #004085; }
-        .status-delivered { background: #d4edda; color: #155724; }
-
-        /* ===== RESPONSIVE DESIGN ===== */
+        /* Responsive */
         @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .dashboard-tabs {
-                flex-direction: column;
-            }
-
-            .wallet-buttons {
-                flex-direction: column;
-            }
-
-            .wallet-btn {
-                min-width: 100%;
-            }
-
-            .container {
-                padding: 0 1rem;
-            }
-        }
-
-        /* ===== CREDENTIALS SECTION ===== */
-        .credentials-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 3rem;
-            margin: 2rem 0;
-            text-align: center;
-        }
-
-        .credentials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .credential-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .credential-card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
+            .nav-container { flex-direction: column; gap: 1rem; }
+            .nav-links { gap: 1rem; }
+            .wallet-buttons { flex-direction: column; }
+            .hero h1 { font-size: 2rem; }
+            .container { padding: 0 1rem; }
         }
     </style>
 </head>
@@ -457,346 +280,186 @@
     <header>
         <nav class="nav-container">
             <div class="logo">
-                <div class="logo-img">
-                    <img src="sureway-logo.png" alt="Sureway Logistics" style="width: 100%; height: 100%; border-radius: 10px; object-fit: cover;">
-                </div>
+                <div class="logo-img">SW</div>
                 <div class="logo-text">Sureway Logistics</div>
             </div>
             <ul class="nav-links">
-    <li><a href="#dashboard">Dashboard</a></li>
-    <li><a href="#about" onclick="showAbout()">About</a></li>
-    <li><a href="#contact" onclick="showContact()">Contact</a></li>
+                <li><a href="#" onclick="showDashboard()">Dashboard</a></li>
+                <li><a href="#" onclick="showAbout()">About</a></li>
+                <li><a href="#" onclick="showContact()">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Main Container -->
+    <!-- Main Content -->
     <div class="container">
         <!-- Hero Section -->
         <section class="hero">
             <h1>Blockchain-Powered Logistics Platform</h1>
-            <p>Secure, transparent, and efficient supply chain management powered by Stacks blockchain technology</p>
+            <p>Secure, transparent supply chain management with Stacks blockchain</p>
+            
+            <!-- Wallet Section -->
             <div class="wallet-section">
                 <h3>🔗 Stacks Blockchain Wallet</h3>
                 
                 <div class="wallet-status">
-                    <span class="status-dot"></span>
+                    <div class="status-dot"></div>
                     <span id="status-text">🔴 Disconnected</span>
                 </div>
                 
                 <div class="wallet-buttons">
-                    <button onclick="connectWallet()" class="wallet-btn hiro-btn">🔐 Connect Stacks Wallet</button>
-                    <button onclick="disconnectWallet()" class="wallet-btn disconnect-btn">🚪 Disconnect</button>
+                    <button class="wallet-btn connect-btn" onclick="connectWallet()">
+                        🔐 Connect Wallet
+                    </button>
+                    <button class="wallet-btn disconnect-btn" onclick="disconnectWallet()">
+                        🚪 Disconnect
+                    </button>
                 </div>
                 
-                <div id="wallet-info" class="wallet-info" style="display: none;">
-                    <p><strong>📍 Address:</strong> <span id="user-address"></span></p>
-                    <p><strong>💰 Balance:</strong> <span id="user-balance">0</span> STX</p>
-                    <p><strong>🌐 Network:</strong> <span id="user-network">Testnet</span></p>
-                </div>
-
-                <div id="transaction-section" class="transaction-section" style="display: none;">
-                    <h4>🧪 Test Transactions</h4>
-                    <button onclick="simulatePayment()" class="tx-btn">💳 Test Payment</button>
-                    <button onclick="simulateShipment()" class="tx-btn">🚚 Test Shipment</button>
+                <div class="wallet-info" id="wallet-info">
+                    <p><strong>Address:</strong> <span id="user-address"></span></p>
+                    <p><strong>Balance:</strong> <span id="user-balance">0</span> STX</p>
+                    <p><strong>Network:</strong> <span id="user-network">Testnet</span></p>
                 </div>
             </div>
         </section>
 
         <!-- Dashboard Section -->
-        <section id="dashboard" class="dashboard-section">
+        <section class="dashboard" id="dashboard-section">
             <h2>Logistics Dashboard</h2>
-            <div class="dashboard-tabs">
-                <button class="tab-btn active" onclick="switchTab('shipper')">Shipper Dashboard</button>
-                <button class="tab-btn" onclick="switchTab('transporter')">Transporter Dashboard</button>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('shipper')">Shipper</button>
+                <button class="tab" onclick="switchTab('transporter')">Transporter</button>
             </div>
 
-            <!-- Shipper Tab Content -->
-            <div id="shipper-tab" class="tab-content active">
+            <!-- Shipper Tab -->
+            <div class="tab-content active" id="shipper-tab">
                 <div class="form-group">
-                    <label for="origin">Origin Address</label>
+                    <label>Origin Address</label>
                     <input type="text" id="origin" placeholder="Enter origin address">
                 </div>
                 <div class="form-group">
-                    <label for="destination">Destination Address</label>
+                    <label>Destination Address</label>
                     <input type="text" id="destination" placeholder="Enter destination address">
                 </div>
                 <div class="form-group">
-                    <label for="cargo-value">Cargo Value (STX)</label>
-                    <input type="number" id="cargo-value" placeholder="Enter cargo value in STX">
+                    <label>Cargo Value (STX)</label>
+                    <input type="number" id="cargo-value" placeholder="Enter value in STX">
                 </div>
                 <button class="btn btn-primary" onclick="createShipment()">Create Shipment</button>
-
-                <div class="shipment-list">
-                    <h3>Active Shipments</h3>
-                    <div class="shipment-card">
-                        <div class="shipment-header">
-                            <span class="shipment-id">SHIP-001</span>
-                            <span class="shipment-status status-pending">Pending</span>
-                        </div>
-                        <p><strong>Route:</strong> Lagos → Abuja</p>
-                        <p><strong>Value:</strong> 500 STX</p>
-                        <p><strong>Created:</strong> 2 hours ago</p>
-                        <button class="btn btn-success" onclick="lockFunds('SHIP-001')">Lock Funds</button>
-                    </div>
-                </div>
             </div>
 
-            <!-- Transporter Tab Content -->
-            <div id="transporter-tab" class="tab-content">
+            <!-- Transporter Tab -->
+            <div class="tab-content" id="transporter-tab">
                 <h3>Available Shipments</h3>
                 <div class="shipment-list">
                     <div class="shipment-card">
-                        <div class="shipment-header">
-                            <span class="shipment-id">SHIP-002</span>
-                            <span class="shipment-status status-pending">Bid Open</span>
-                        </div>
-                        <p><strong>Route:</strong> Port Harcourt → Kano</p>
-                        <p><strong>Value:</strong> 800 STX</p>
-                        <p><strong>Bid Deadline:</strong> 24 hours</p>
-                        <button class="btn btn-primary" onclick="placeBid('SHIP-002')">Place Bid</button>
+                        <p><strong>Shipment #001</strong></p>
+                        <p>Lagos → Abuja • 500 STX</p>
+                        <button class="btn btn-primary" onclick="acceptShipment('001')">Accept Shipment</button>
                     </div>
-                    
-                    <div class="shipment-card">
-                        <div class="shipment-header">
-                            <span class="shipment-id">SHIP-003</span>
-                            <span class="shipment-status status-in-transit">In Transit</span>
-                        </div>
-                        <p><strong>Route:</strong> Abuja → Lagos</p>
-                        <p><strong>Value:</strong> 600 STX</p>
-                        <p><strong>Status:</strong> 50% completed</p>
-                        <button class="btn btn-success" onclick="updateStatus('SHIP-003')">Update Status</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Credentials Section -->
-        <section class="credentials-section">
-            <h2>🏆 Verified Expertise & Recognition</h2>
-            <div class="credentials-grid">
-                <div class="credential-card">
-                    <h3>World Economic Forum</h3>
-                    <p>SDIM25 Invited Participant</p>
-                </div>
-                <div class="credential-card">
-                    <h3>3MTT Nigeria</h3>
-                    <p>AI Fellow Cohort 3</p>
-                </div>
-                <div class="credential-card">
-                    <h3>NCAIR Nigeria</h3>
-                    <p>4IR Recognized Innovator</p>
-                </div>
-                <div class="credential-card">
-                    <h3>Stacks Blockchain</h3>
-                    <p>Hackathon Participant</p>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- Notification System -->
-    <div id="notification" class="notification">
+    <!-- Notification -->
+    <div class="notification" id="notification">
         <span id="notification-text"></span>
     </div>
 
-    <!-- Scripts -->
-    // ===== NOTIFICATION SYSTEM =====
-function showNotification(message, type) {
-    const notification = document.getElementById('notification');
-    const notificationText = document.getElementById('notification-text');
-    
-    notificationText.textContent = message;
-    notification.className = `notification ${type} show`;
-    
-    setTimeout(() => {
-        notification.classList.remove('show');
-    }, 5000);
-}
-
-// ===== NAVIGATION FUNCTIONS =====
-function showAbout() {
-    showNotification('🚀 Sureway Logistics: Transforming African supply chains with blockchain technology', 'info');
-}
-
-function showContact() {
-    showNotification('📞 Contact: surewaylogistics@email.com | +234 XXX XXX XXXX', 'info');
-}
-
-// ===== DASHBOARD FUNCTIONALITY =====
-function switchTab(tabName) {
-    // Update tab buttons
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
-    
-    // Update tab content
-    document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.remove('active');
-    });
-    document.getElementById(`${tabName}-tab`).classList.add('active');
-}
-
-// ===== SHIPPER FUNCTIONS =====
-function createShipment() {
-    const origin = document.getElementById('origin').value;
-    const destination = document.getElementById('destination').value;
-    const value = document.getElementById('cargo-value').value;
-    
-    if (!origin || !destination || !value) {
-        showNotification('Please fill all fields', 'error');
-        return;
-    }
-    
-    showNotification(`✅ Shipment created from ${origin} to ${destination} for ${value} STX`, 'success');
-    
-    // Clear form
-    document.getElementById('origin').value = '';
-    document.getElementById('destination').value = '';
-    document.getElementById('cargo-value').value = '';
-}
-
-function lockFunds(shipmentId) {
-    showNotification(`💰 Funds locked for ${shipmentId} - Ready for transporter bidding`, 'success');
-}
-
-// ===== TRANSPORTER FUNCTIONS =====
-function placeBid(shipmentId) {
-    showNotification(`✅ Bid placed for ${shipmentId} - Waiting for shipper approval`, 'success');
-}
-
-function updateStatus(shipmentId) {
-    showNotification(`📦 Status updated for ${shipmentId} - In transit (50% completed)`, 'success');
-}
-
-// ===== STACKS BLOCKCHAIN INTEGRATION =====
-let userSession = null;
-let isConnected = false;
-
-function initStacks() {
-    try {
-        // Check if Stacks library is loaded
-        if (typeof Stacks === 'undefined') {
-            console.error('Stacks library not loaded');
-            return;
+    <!-- JavaScript -->
+    <script>
+        // Notification System
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            const text = document.getElementById('notification-text');
+            
+            notification.className = `notification ${type}`;
+            text.textContent = message;
+            
+            // Show notification
+            setTimeout(() => notification.classList.add('show'), 100);
+            
+            // Hide after 5 seconds
+            setTimeout(() => notification.classList.remove('show'), 5000);
         }
-        
-        const appConfig = new Stacks.AppConfig(['store_write', 'publish_data']);
-        userSession = new Stacks.UserSession({ appConfig });
-        
-        if (userSession.isUserSignedIn()) {
-            handleConnectedWallet();
+
+        // Navigation Functions
+        function showDashboard() {
+            showNotification('🏠 Dashboard loaded successfully', 'info');
         }
-    } catch (error) {
-        console.error('Stacks initialization error:', error);
-    }
-}
 
-async function connectWallet() {
-    try {
-        showNotification('🔗 Connecting to Stacks Wallet...', 'info');
-        
-        // Add delay to show notification
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // For demo purposes - simulate successful connection
-        // In real implementation, this would redirect to Hiro Wallet
-        simulateWalletConnection();
-        
-    } catch (error) {
-        console.error('Wallet connection error:', error);
-        showNotification('❌ Wallet connection failed - Using demo mode', 'error');
-        // Fallback to demo mode
-        simulateWalletConnection();
-    }
-}
+        function showAbout() {
+            showNotification('🚀 Sureway Logistics - Transforming African supply chains with blockchain technology', 'info');
+        }
 
-// Simulate wallet connection for demo
-function simulateWalletConnection() {
-    isConnected = true;
-    
-    // Demo wallet address (testnet)
-    const demoAddress = 'SP3ABC123...XYZ789';
-    const demoBalance = '125.50';
-    
-    document.getElementById('user-address').textContent = demoAddress;
-    document.getElementById('user-balance').textContent = demoBalance;
-    document.getElementById('wallet-info').style.display = 'block';
-    document.getElementById('transaction-section').style.display = 'block';
-    document.getElementById('status-text').innerHTML = '🟢 Connected (Demo Mode)';
-    document.querySelector('.status-dot').style.backgroundColor = '#00d4aa';
-    
-    showNotification('✅ Wallet connected successfully! (Demo Mode)', 'success');
-}
+        function showContact() {
+            showNotification('📞 Contact us: sureway@logistics.com • +234 XXX XXX XXXX', 'info');
+        }
 
-function disconnectWallet() {
-    isConnected = false;
-    
-    document.getElementById('wallet-info').style.display = 'none';
-    document.getElementById('transaction-section').style.display = 'none';
-    document.getElementById('status-text').innerHTML = '🔴 Disconnected';
-    document.querySelector('.status-dot').style.backgroundColor = '#ff6b6b';
-    
-    showNotification('👋 Wallet disconnected', 'info');
-}
+        // Dashboard Functions
+        function switchTab(tabName) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
 
-// Simulate balance fetch
-async function fetchBalance(address) {
-    try {
-        // Demo balance - in real implementation, this would fetch from Stacks API
-        const demoBalance = (Math.random() * 1000).toFixed(2);
-        document.getElementById('user-balance').textContent = demoBalance;
-    } catch (error) {
-        console.error('Balance fetch error:', error);
-    }
-}
+        function createShipment() {
+            const origin = document.getElementById('origin').value;
+            const destination = document.getElementById('destination').value;
+            const value = document.getElementById('cargo-value').value;
+            
+            if (!origin || !destination || !value) {
+                showNotification('❌ Please fill all fields', 'error');
+                return;
+            }
+            
+            showNotification(`✅ Shipment created: ${origin} → ${destination} (${value} STX)`, 'success');
+            
+            // Clear form
+            document.getElementById('origin').value = '';
+            document.getElementById('destination').value = '';
+            document.getElementById('cargo-value').value = '';
+        }
 
-async function simulatePayment() {
-    if (!isConnected) {
-        showNotification('Please connect your wallet first!', 'error');
-        return;
-    }
+        function acceptShipment(shipmentId) {
+            showNotification(`✅ Shipment ${shipmentId} accepted! Preparing for pickup.`, 'success');
+        }
 
-    showNotification('⏳ Processing payment transaction on blockchain...', 'info');
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    showNotification('✅ Payment transaction completed! TX: 0xABC123...', 'success');
-}
+        // Wallet Functions
+        function connectWallet() {
+            showNotification('🔗 Connecting to Stacks wallet...', 'info');
+            
+            // Simulate connection delay
+            setTimeout(() => {
+                document.getElementById('status-text').textContent = '🟢 Connected';
+                document.querySelector('.status-dot').style.background = '#00d4aa';
+                document.getElementById('wallet-info').style.display = 'block';
+                document.getElementById('user-address').textContent = 'SP3ABC...XYZ789';
+                document.getElementById('user-balance').textContent = '125.50';
+                
+                showNotification('✅ Wallet connected successfully!', 'success');
+            }, 2000);
+        }
 
-async function simulateShipment() {
-    if (!isConnected) {
-        showNotification('Please connect your wallet first!', 'error');
-        return;
-    }
+        function disconnectWallet() {
+            document.getElementById('status-text').textContent = '🔴 Disconnected';
+            document.querySelector('.status-dot').style.background = '#ff6b6b';
+            document.getElementById('wallet-info').style.display = 'none';
+            
+            showNotification('👋 Wallet disconnected', 'info');
+        }
 
-    showNotification('⏳ Creating smart contract for shipment...', 'info');
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    showNotification('✅ Shipment contract deployed! Address: 0xDEF456...', 'success');
-}
-
-// ===== ENHANCED NAVIGATION =====
-// Update your navigation HTML to include onclick events:
-// <li><a href="#about" onclick="showAbout()">About</a></li>
-// <li><a href="#contact" onclick="showContact()">Contact</a></li>
-
-// Initialize when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    initStacks();
-    showNotification('Welcome to Sureway Logistics Platform!', 'info');
-    
-    // Add click events to navigation links
-    document.querySelector('a[href="#about"]').addEventListener('click', function(e) {
-        e.preventDefault();
-        showAbout();
-    });
-    
-    document.querySelector('a[href="#contact"]').addEventListener('click', function(e) {
-        e.preventDefault();
-        showContact();
-    });
-});
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showNotification('Welcome to Sureway Logistics Platform!', 'info');
+        });
     </script>
 </body>
 </html>
-
-        
