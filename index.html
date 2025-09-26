@@ -462,7 +462,11 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             showNotification('Welcome to Sureway Logistics Platform!', 'info');
-        });
+        });() {
+    showNotification('🚀 Platform Loaded with Demo Data', 'success');
+    // Simulate some active shipments
+    setTimeout(() => showNotification('📦 3 Active Shipments Detected', 'info'), 2000);
+}
     </script>
 </body>
 </html>
