@@ -309,7 +309,19 @@
                     <div class="status-dot"></div>
                     <span id="status-text">🔴 Disconnected</span>
                 </div>
-                
+                <div class="wallet-buttons">
+    <button class="wallet-btn connect-btn" onclick="connectWallet()">
+        🔐 Connect Wallet
+    </button>
+    <button class="wallet-btn disconnect-btn" onclick="disconnectWallet()">
+        🚪 Disconnect
+    </button>
+    <!-- 🚨 ADD THIS NEW BUTTON -->
+    <button class="wallet-btn disconnect-btn" onclick="testRealTransaction()" 
+            style="background: #ff6b35;">
+        🧪 Test Real TX
+    </button>
+</div>
                 <div class="wallet-buttons">
                     <button class="wallet-btn connect-btn" onclick="connectWallet()">
                         🔐 Connect Wallet
@@ -372,6 +384,7 @@
         <span id="notification-text"></span>
     </div>
 
+`javascript
     <!-- JavaScript -->
     <script>
         // Notification System
@@ -435,28 +448,133 @@
             showNotification(`✅ Shipment ${shipmentId} accepted! Preparing for pickup.`, 'success');
         }
 
-        // Wallet Functions
-        function connectWallet() {
-            showNotification('🔗 Connecting to Stacks wallet...', 'info');
-            
-            // Simulate connection delay
-            setTimeout(() => {
-                document.getElementById('status-text').textContent = '🟢 Connected';
-                document.querySelector('.status-dot').style.background = '#00d4aa';
-                document.getElementById('wallet-info').style.display = 'block';
-                document.getElementById('user-address').textContent = 'SP3ABC...XYZ789';
-                document.getElementById('user-balance').textContent = '125.50';
+        // ===== REAL STACKS WALLET CONNECTION =====
+        async function connectWallet() {
+            try {
+                showNotification('🔗 Connecting to Leather Wallet...', 'info');
                 
-                showNotification('✅ Wallet connected successfully!', 'success');
-            }, 2000);
+                // Check if Leather wallet is available
+                if (typeof window.LeatherProvider === 'undefined') {
+                    showNotification('⚠️ Leather Wallet not found - using demo mode', 'info');
+                    simulateWalletConnection();
+                    return;
+                }
+                
+                const provider = new window.LeatherProvider();
+                const accounts = await provider.getAccounts();
+                
+                if (accounts.length === 0) {
+                    showNotification('❌ No accounts found in Leather Wallet', 'error');
+                    simulateWalletConnection();
+                    return;
+                }
+                
+                // Use real wallet address
+                const userAddress = accounts[0];
+                await handleRealWalletConnection(userAddress);
+                
+            } catch (error) {
+                console.error('Wallet connection error:', error);
+                showNotification('❌ Wallet connection failed', 'error');
+                simulateWalletConnection();
+            }
         }
 
+        async function handleRealWalletConnection(address) {
+            // Update UI
+            document.getElementById('status-text').textContent = '🟢 Connected (Testnet)';
+            document.querySelector('.status-dot').style.background = '#00d4aa';
+            document.getElementById('wallet-info').style.display = 'block';
+            document.getElementById('user-address').textContent = address.slice(0, 8) + '...' + address.slice(-8);
+            
+            showNotification('✅ Leather Wallet connected!', 'success');
+            
+            // Fetch real balance
+            await fetchRealBalance(address);
+        }
+
+        async function fetchRealBalance(address) {
+            try {
+                const url = `https://api.testnet.hiro.so/extended/v1/address/${address}/stx`;
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                const balance = data.balance / 1000000; // Convert from microSTX
+                document.getElementById('user-balance').textContent = balance.toFixed(2);
+                
+                showNotification(`💰 Balance: ${balance.toFixed(2)} STX`, 'info');
+                
+            } catch (error) {
+                console.error('Balance fetch error:', error);
+                document.getElementById('user-balance').textContent = '0.00';
+            }
+        }
+
+        // Demo fallback with your real address
+        function simulateWalletConnection() {
+            showNotification('🔗 Connecting wallet...', 'info');
+            
+            setTimeout(() => {
+                document.getElementById('status-text').textContent = '🟢 Connected (Demo)';
+                document.querySelector('.status-dot').style.background = '#00d4aa';
+                document.getElementById('wallet-info').style.display = 'block';
+                document.getElementById('user-address').textContent = 'ST3XE7...Q7WA'; // Your address
+                document.getElementById('user-balance').textContent = '5.25';
+                
+                showNotification('✅ Demo wallet connected!', 'success');
+            }, 1500);
+        }
+        
         function disconnectWallet() {
             document.getElementById('status-text').textContent = '🔴 Disconnected';
             document.querySelector('.status-dot').style.background = '#ff6b6b';
             document.getElementById('wallet-info').style.display = 'none';
             
             showNotification('👋 Wallet disconnected', 'info');
+        }
+
+        // ===== REAL TRANSACTION TEST FUNCTION =====
+        async function testRealTransaction() {
+            try {
+                if (typeof window.LeatherProvider === 'undefined') {
+                    showNotification('⚠️ Please install Leather Wallet for real transactions', 'error');
+                    return;
+                }
+                
+                const provider = new window.LeatherProvider();
+                const accounts = await provider.getAccounts();
+                
+                if (accounts.length === 0) {
+                    showNotification('❌ Please connect wallet first', 'error');
+                    return;
+                }
+                
+                const userAddress = accounts[0];
+                
+                showNotification('🔐 Preparing real transaction...', 'info');
+                
+                // Send 0.001 STX to yourself (test transaction)
+                const txOptions = {
+                    amount: 1000, // 0.001 STX in microSTX
+                    recipient: userAddress, // Send to yourself for testing
+                    memo: 'MeMart Platform Test'
+                };
+                
+                showNotification('✅ Please confirm in Leather Wallet...', 'info');
+                
+                const txResult = await provider.stxTransfer(txOptions);
+                
+                showNotification(`🎉 Real transaction sent! TX ID: ${txResult.txId.slice(0, 10)}...`, 'success');
+                
+                // Update balance after 5 seconds
+                setTimeout(() => {
+                    fetchRealBalance(userAddress);
+                }, 5000);
+                
+            } catch (error) {
+                console.error('Real transaction error:', error);
+                showNotification('❌ Transaction failed: ' + error.message, 'error');
+            }
         }
 
         // Initialize
