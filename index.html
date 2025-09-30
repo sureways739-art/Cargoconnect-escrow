@@ -376,7 +376,7 @@
     <div class="notification" id="notification">
         <span id="notification-text"></span>
     </div>
-        <!-- JavaScript -->
+            <!-- JavaScript -->
 <script>
     // Notification System
     function showNotification(message, type) {
@@ -502,63 +502,6 @@ function simulateMobileConnection() {
         }, 2000);
     }, 1500);
 }
-        } catch (error) {
-            console.error('Wallet connection error:', error);
-            showNotification('❌ Connection failed - using demo mode', 'error');
-            simulateWalletConnection();
-        }
-    }
-
-    // Check if user is on mobile with Leather Wallet
-    function isMobileWithLeather() {
-        return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-    }
-
-    async function handleRealWalletConnection(address) {
-        // Update UI
-        document.getElementById('status-text').textContent = '🟢 Connected (Mobile)';
-        document.querySelector('.status-dot').style.background = '#00d4aa';
-        document.getElementById('wallet-info').style.display = 'block';
-        document.getElementById('user-address').textContent = address.slice(0, 8) + '...' + address.slice(-8);
-        
-        showNotification('✅ Leather Wallet Mobile Connected!', 'success');
-        
-        // Fetch real balance
-        await fetchRealBalance(address);
-    }
-
-    async function fetchRealBalance(address) {
-        try {
-            const url = `https://api.testnet.hiro.so/extended/v1/address/${address}/stx`;
-            const response = await fetch(url);
-            const data = await response.json();
-            
-            const balance = data.balance / 1000000; // Convert from microSTX
-            document.getElementById('user-balance').textContent = balance.toFixed(2);
-            
-            showNotification(`💰 Mobile Balance: ${balance.toFixed(2)} STX`, 'success');
-            
-        } catch (error) {
-            console.error('Balance fetch error:', error);
-            document.getElementById('user-balance').textContent = '0.00';
-        }
-    }
-
-    // Demo fallback
-    function simulateWalletConnection() {
-        showNotification('🔗 Connecting wallet...', 'info');
-        
-        setTimeout(() => {
-            document.getElementById('status-text').textContent = '🟢 Connected (Demo)';
-            document.querySelector('.status-dot').style.background = '#00d4aa';
-            document.getElementById('wallet-info').style.display = 'block';
-            document.getElementById('user-address').textContent = 'ST3XE7...Q7WA';
-            document.getElementById('user-balance').textContent = '5.25';
-            
-            showNotification('✅ Demo wallet connected!', 'success');
-        }, 1500);
-    }
-    
     function disconnectWallet() {
         document.getElementById('status-text').textContent = '🔴 Disconnected';
         document.querySelector('.status-dot').style.background = '#ff6b6b';
