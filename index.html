@@ -5,274 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sureway Logistics - Blockchain Supply Chain Platform</title>
     <style>
+        /* YOUR EXISTING CSS STYLES - KEEP ALL OF THIS */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
-        }
-
-        /* Header Styles */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo-img {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            background: #667eea;
-            color: white;
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 3rem;
-            text-align: center;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Wallet Section */
-        .wallet-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-            color: white;
-        }
-
-        .wallet-status {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ff6b6b;
-            margin-right: 10px;
-        }
-
-        .wallet-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .wallet-btn {
-            padding: 1rem 1.5rem;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            flex: 1;
-        }
-
-        .connect-btn { background: #00d4aa; color: white; }
-        .disconnect-btn { background: rgba(255,255,255,0.2); color: white; }
-
-        .wallet-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .wallet-info {
-            background: rgba(255,255,255,0.1);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-top: 1rem;
-            display: none;
-        }
-
-        /* Dashboard Styles */
-        .dashboard {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid #eee;
-        }
-
-        .tab {
-            padding: 1rem 2rem;
-            border: none;
-            background: none;
-            font-size: 1.1rem;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-        }
-
-        .tab.active {
-            color: #667eea;
-            border-bottom-color: #667eea;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #eee;
-            border-radius: 10px;
-            font-size: 1rem;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: #667eea;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #5a6fd8;
-            transform: translateY(-2px);
-        }
-
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            color: white;
-            font-weight: 500;
-            z-index: 1000;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        .notification.success { background: #00d4aa; }
-        .notification.error { background: #ff6b6b; }
-        .notification.info { background: #667eea; }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-container { flex-direction: column; gap: 1rem; }
-            .nav-links { gap: 1rem; }
-            .wallet-buttons { flex-direction: column; }
-            .hero h1 { font-size: 2rem; }
-            .container { padding: 0 1rem; }
-        }
+        /* ... ALL YOUR EXISTING CSS ... */
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@stacks/connect@6.7.4/dist/connect.min.js"></script>
 </head>
@@ -282,9 +22,9 @@
         <nav class="nav-container">
             <div class="logo">
                 <div class="logo-img">
-    <img src="sureway-logo.png" alt="Sureway Logistics" 
-         style="width: 100%; height: 100%; border-radius: 10px; object-fit: cover;">
-</div>
+                    <img src="sureway-logo.png" alt="Sureway Logistics" 
+                         style="width: 100%; height: 100%; border-radius: 10px; object-fit: cover;">
+                </div>
                 <div class="logo-text">Sureway Logistics</div>
             </div>
             <ul class="nav-links">
@@ -296,291 +36,324 @@
     </header>
 
     <!-- Main Content -->
-<div class="container">
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Blockchain-Powered Logistics Platform</h1>
-        <p>Secure, transparent supply chain management with Stacks blockchain</p>
-        
-        <!-- Wallet Section -->
-        <div class="wallet-section">
-            <h3>🔗 Stacks Blockchain Wallet</h3>
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Blockchain-Powered Logistics Platform</h1>
+            <p>Secure, transparent supply chain management with Stacks blockchain</p>
             
-            <div class="wallet-status">
-                <div class="status-dot"></div>
-                <span id="status-text">🔴 Disconnected</span>
-            </div>
-            
-            <!-- 🚨 CORRECTED BUTTONS SECTION - ONLY ONE SET -->
-            <div class="wallet-buttons">
-                <button class="wallet-btn connect-btn" onclick="connectWallet()">
-                    🔐 Connect Wallet
-                </button>
-                <button class="wallet-btn disconnect-btn" onclick="disconnectWallet()">
-                    🚪 Disconnect
-                </button>
-                <button class="wallet-btn" style="background: #ff6b35; color: white;" onclick="testRealTransaction()">
-                    🧪 Test Real TX
-                </button>
-                <button class="wallet-btn" style="background: #17a2b8; color: white;" onclick="showMobileHelp()">
+            <!-- Wallet Section -->
+            <div class="wallet-section">
+                <h3>🔗 Stacks Blockchain Wallet</h3>
+                
+                <div class="wallet-status">
+                    <div class="status-dot"></div>
+                    <span id="status-text">🔴 Disconnected</span>
+                </div>
+
+                <!-- ADD THE MISSING WALLET BUTTONS AND INFO -->
+                <div class="wallet-buttons">
+                    <button class="wallet-btn connect-btn" onclick="connectWallet()">
+                        🔗 Connect Leather Wallet
+                    </button>
+                    <button class="wallet-btn disconnect-btn" onclick="disconnectWallet()">
+                        🚪 Disconnect
+                    </button>
+                </div>
+
+                <button class="wallet-btn" onclick="showMobileHelp()" 
+                        style="background: rgba(255,255,255,0.2); color: white; margin-bottom: 1rem;">
                     📱 Mobile Help
                 </button>
+
+                <!-- Wallet Info Display -->
+                <div class="wallet-info" id="wallet-info">
+                    <div><strong>Address:</strong> <span id="user-address">-</span></div>
+                    <div><strong>Balance:</strong> <span id="user-balance">-</span> STX</div>
+                    <div><strong>Network:</strong> <span id="user-network">-</span></div>
+                    
+                    <button class="btn btn-primary" onclick="testRealTransaction()" 
+                            style="margin-top: 1rem; width: 100%;">
+                        🧪 Test Real Transaction
+                    </button>
+                </div>
             </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section class="dashboard">
+            <h2>📦 Shipment Management</h2>
             
-            <div class="wallet-info" id="wallet-info">
-                <p><strong>Address:</strong> <span id="user-address"></span></p>
-                <p><strong>Balance:</strong> <span id="user-balance">0</span> STX</p>
-                <p><strong>Network:</strong> <span id="user-network">Testnet</span></p>
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('create')">Create Shipment</button>
+                <button class="tab" onclick="switchTab('active')">Active Shipments</button>
+                <button class="tab" onclick="switchTab('completed')">Completed</button>
             </div>
-        </div>
-    </section>
 
-    <!-- Dashboard Section -->
-    <section class="dashboard" id="dashboard-section">
-        <h2>Logistics Dashboard</h2>
-        
-        <div class="tabs">
-            <button class="tab active" onclick="switchTab('shipper')">Shipper</button>
-            <button class="tab" onclick="switchTab('transporter')">Transporter</button>
-        </div>
-
-            <!-- Shipper Tab -->
-            <div class="tab-content active" id="shipper-tab">
+            <!-- Tab Contents -->
+            <div id="create-tab" class="tab-content active">
                 <div class="form-group">
-                    <label>Origin Address</label>
-                    <input type="text" id="origin" placeholder="Enter origin address">
+                    <label>Origin</label>
+                    <input type="text" id="origin" placeholder="e.g., Lagos, Nigeria">
                 </div>
                 <div class="form-group">
-                    <label>Destination Address</label>
-                    <input type="text" id="destination" placeholder="Enter destination address">
+                    <label>Destination</label>
+                    <input type="text" id="destination" placeholder="e.g., Accra, Ghana">
                 </div>
                 <div class="form-group">
                     <label>Cargo Value (STX)</label>
-                    <input type="number" id="cargo-value" placeholder="Enter value in STX">
+                    <input type="number" id="cargo-value" placeholder="e.g., 100">
                 </div>
                 <button class="btn btn-primary" onclick="createShipment()">Create Shipment</button>
-            </div> <!--Transporter Tab--> </div>
-            <div class="tab-content" id="transporter-tab">
-                <h3>Available Shipments</h3>
-                <div class="shipment-list">
-                    <div class="shipment-card">
-                        <p><strong>Shipment #001</strong></p>
-                        <p>Lagos → Abuja • 500 STX</p>
-                        <button class="btn btn-primary" onclick="acceptShipment('001')">Accept Shipment</button>
-                    </div>
-                </div>
+            </div>
+
+            <div id="active-tab" class="tab-content">
+                <p>Active shipments will appear here once created.</p>
+            </div>
+
+            <div id="completed-tab" class="tab-content">
+                <p>Completed shipments will appear here.</p>
             </div>
         </section>
     </div>
 
-    <!-- Notification -->
-    <div class="notification" id="notification">
+    <!-- Notification System -->
+    <div id="notification" class="notification">
         <span id="notification-text"></span>
     </div>
-            <!-- JavaScript -->
-<script>
- 
 
+    <!-- ===== PASTE THE JAVASCRIPT CODE RIGHT HERE ===== -->
+    <script>
     // ===== WORKING MOBILE WALLET INTEGRATION =====
-async function connectWallet() {
-    try {
-        showNotification('🔗 Connecting to Leather Wallet...', 'info');
+    async function connectWallet() {
+        try {
+            showNotification('🔗 Connecting to Leather Wallet...', 'info');
 
-        // Check if Stacks Connect is available (works for both mobile and extension)
-        if (typeof window.StacksConnect !== 'undefined') {
-            await connectWithStacksConnect();
-        } 
-        // Check for Leather extension specifically
-        else if (typeof window.LeatherProvider !== 'undefined') {
-            await connectWithLeatherExtension();
-        }
-        // Mobile-specific deep linking
-        else if (isMobileDevice()) {
-            await connectWithMobileDeepLink();
-        }
-        else {
-            showNotification('❌ No wallet detected. Please install Leather Wallet', 'error');
+            // Check if Stacks Connect is available
+            if (typeof window.StacksConnect !== 'undefined') {
+                await connectWithStacksConnect();
+            } 
+            // Check for Leather extension
+            else if (typeof window.LeatherProvider !== 'undefined') {
+                await connectWithLeatherExtension();
+            }
+            // Mobile-specific deep linking
+            else if (isMobileDevice()) {
+                await connectWithMobileDeepLink();
+            }
+            else {
+                showNotification('❌ No wallet detected. Please install Leather Wallet', 'error');
+                simulateWalletConnection();
+            }
+            
+        } catch (error) {
+            console.error('Wallet connection error:', error);
+            showNotification('❌ Connection failed - using demo mode', 'error');
             simulateWalletConnection();
         }
-        
-    } catch (error) {
-        console.error('Wallet connection error:', error);
-        showNotification('❌ Connection failed - using demo mode', 'error');
-        simulateWalletConnection();
     }
-}
 
-// === STACKS CONNECT INTEGRATION (RECOMMENDED) ===
-async function connectWithStacksConnect() {
-    try {
-        const appDetails = {
-            name: 'Sureway Logistics',
-            icon: window.location.origin + '/logo.png'
-        };
+    // === STACKS CONNECT INTEGRATION ===
+    async function connectWithStacksConnect() {
+        try {
+            const appDetails = {
+                name: 'Sureway Logistics',
+                icon: window.location.origin + '/logo.png'
+            };
 
-        const connect = window.StacksConnect;
-        const userSession = new connect.UserSession({ appDetails });
-        
-        if (userSession.isUserSignedIn()) {
-            const userData = userSession.loadUserData();
-            await handleRealWalletConnection(userData.profile.stxAddress.testnet);
-        } else {
-            userSession.redirectToSignIn();
+            const connect = window.StacksConnect;
+            const userSession = new connect.UserSession({ appDetails });
+            
+            if (userSession.isUserSignedIn()) {
+                const userData = userSession.loadUserData();
+                await handleRealWalletConnection(userData.profile.stxAddress.testnet);
+            } else {
+                userSession.redirectToSignIn();
+            }
+        } catch (error) {
+            throw new Error('Stacks Connect failed: ' + error.message);
         }
-    } catch (error) {
-        throw new Error('Stacks Connect failed: ' + error.message);
     }
-}
 
-// === LEATHER EXTENSION INTEGRATION ===
-async function connectWithLeatherExtension() {
-    try {
-        const provider = new window.LeatherProvider();
-        const accounts = await provider.getAccounts();
-        
-        if (accounts.length === 0) {
-            throw new Error('No accounts found');
+    // === LEATHER EXTENSION INTEGRATION ===
+    async function connectWithLeatherExtension() {
+        try {
+            const provider = new window.LeatherProvider();
+            const accounts = await provider.getAccounts();
+            
+            if (accounts.length === 0) {
+                throw new Error('No accounts found');
+            }
+            
+            const userAddress = accounts[0];
+            await handleRealWalletConnection(userAddress);
+        } catch (error) {
+            throw new Error('Leather extension failed: ' + error.message);
         }
-        
-        const userAddress = accounts[0];
-        await handleRealWalletConnection(userAddress);
-    } catch (error) {
-        throw new Error('Leather extension failed: ' + error.message);
     }
-}
 
-// === MOBILE DEEP LINK INTEGRATION ===
-async function connectWithMobileDeepLink() {
-    showNotification('📱 Opening Leather Wallet App...', 'info');
-    
-    // Create a proper Stacks Connect deep link
-    const authRequest = `stacks:?action=connect&redirect_uri=${encodeURIComponent(window.location.href)}&appName=Sureway+Logistics`;
-    
-    // Redirect to Leather Wallet
-    window.location.href = authRequest;
-    
-    // Fallback after 3 seconds
-    setTimeout(() => {
-        if (!document.hidden) {
-            showNotification('💡 Make sure Leather Wallet is installed!', 'info');
-            simulateWalletConnection();
-        }
-    }, 3000);
-}
-
-// === IMPROVED MOBILE DETECTION ===
-function isMobileDevice() {
-    return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-}
-
-// === REAL CONNECTION HANDLER ===
-async function handleRealWalletConnection(address) {
-    document.getElementById('status-text').textContent = '🟢 Connected';
-    document.querySelector('.status-dot').style.background = '#00d4aa';
-    document.getElementById('wallet-info').style.display = 'block';
-    document.getElementById('user-address').textContent = `${address.slice(0, 8)}...${address.slice(-8)}`;
-    document.getElementById('user-network').textContent = 'Testnet';
-    
-    // Fetch real balance from Hiro API
-    await fetchRealBalance(address);
-    showNotification('✅ Leather Wallet Connected Successfully!', 'success');
-}
-
-// === REAL BALANCE FETCH ===
-async function fetchRealBalance(address) {
-    try {
-        // Use Hiro API for Testnet
-        const response = await fetch(`https://api.testnet.hiro.so/extended/v1/address/${address}/stx`);
-        const data = await response.json();
+    // === MOBILE DEEP LINK INTEGRATION ===
+    async function connectWithMobileDeepLink() {
+        showNotification('📱 Opening Leather Wallet App...', 'info');
         
-        const balance = (data.balance / 1000000).toFixed(2);
-        document.getElementById('user-balance').textContent = balance;
+        const authRequest = `stacks:?action=connect&redirect_uri=${encodeURIComponent(window.location.href)}&appName=Sureway+Logistics`;
+        window.location.href = authRequest;
         
-        showNotification(`💰 Balance: ${balance} STX`, 'success');
-    } catch (error) {
-        console.error('Balance fetch error:', error);
-        document.getElementById('user-balance').textContent = '0.00';
-        showNotification('⚠️ Could not fetch balance', 'info');
+        setTimeout(() => {
+            if (!document.hidden) {
+                showNotification('💡 Make sure Leather Wallet is installed!', 'info');
+                simulateWalletConnection();
+            }
+        }, 3000);
     }
-}
 
-// === DEMO FALLBACK ===
-function simulateWalletConnection() {
-    showNotification('🔗 Setting up demo mode...', 'info');
-    
-    setTimeout(() => {
-        document.getElementById('status-text').textContent = '🟢 Connected (Demo)';
+    // === MOBILE DETECTION ===
+    function isMobileDevice() {
+        return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    }
+
+    // === REAL CONNECTION HANDLER ===
+    async function handleRealWalletConnection(address) {
+        document.getElementById('status-text').textContent = '🟢 Connected';
         document.querySelector('.status-dot').style.background = '#00d4aa';
         document.getElementById('wallet-info').style.display = 'block';
-        document.getElementById('user-address').textContent = 'ST3XE7...Q7WA';
-        document.getElementById('user-balance').textContent = '500.00';
-        document.getElementById('user-network').textContent = 'Testnet (Demo)';
+        document.getElementById('user-address').textContent = `${address.slice(0, 8)}...${address.slice(-8)}`;
+        document.getElementById('user-network').textContent = 'Testnet';
         
-        showNotification('✅ Demo wallet connected!', 'success');
-    }, 1500);
-}
-
-// === DISCONNECT WALLET ===
-function disconnectWallet() {
-    document.getElementById('status-text').textContent = '🔴 Disconnected';
-    document.querySelector('.status-dot').style.background = '#ff6b6b';
-    document.getElementById('wallet-info').style.display = 'none';
-    showNotification('👋 Wallet disconnected', 'info');
-}
-
-// === TEST TRANSACTION (IMPROVED) ===
-async function testRealTransaction() {
-    const userAddress = document.getElementById('user-address').textContent;
-    
-    if (userAddress.includes('(Demo)') || userAddress === 'ST3XE7...Q7WA') {
-        showNotification('❌ Please connect REAL wallet first', 'error');
-        showMobileHelp();
-        return;
+        await fetchRealBalance(address);
+        showNotification('✅ Leather Wallet Connected Successfully!', 'success');
     }
-    
-    showNotification('🚀 This would execute a real transaction!', 'success');
-}
 
-// === BETTER MOBILE HELP ===
-function showMobileHelp() {
-    const helpText = `🎯 REAL MOBILE CONNECTION GUIDE:
+    // === REAL BALANCE FETCH ===
+    async function fetchRealBalance(address) {
+        try {
+            const response = await fetch(`https://api.testnet.hiro.so/extended/v1/address/${address}/stx`);
+            const data = await response.json();
+            
+            const balance = (data.balance / 1000000).toFixed(2);
+            document.getElementById('user-balance').textContent = balance;
+            
+            showNotification(`💰 Balance: ${balance} STX`, 'success');
+        } catch (error) {
+            console.error('Balance fetch error:', error);
+            document.getElementById('user-balance').textContent = '0.00';
+            showNotification('⚠️ Could not fetch balance', 'info');
+        }
+    }
+
+    // === DEMO FALLBACK ===
+    function simulateWalletConnection() {
+        showNotification('🔗 Setting up demo mode...', 'info');
+        
+        setTimeout(() => {
+            document.getElementById('status-text').textContent = '🟢 Connected (Demo)';
+            document.querySelector('.status-dot').style.background = '#00d4aa';
+            document.getElementById('wallet-info').style.display = 'block';
+            document.getElementById('user-address').textContent = 'ST3XE7...Q7WA';
+            document.getElementById('user-balance').textContent = '500.00';
+            document.getElementById('user-network').textContent = 'Testnet (Demo)';
+            
+            showNotification('✅ Demo wallet connected!', 'success');
+        }, 1500);
+    }
+
+    // === DISCONNECT WALLET ===
+    function disconnectWallet() {
+        document.getElementById('status-text').textContent = '🔴 Disconnected';
+        document.querySelector('.status-dot').style.background = '#ff6b6b';
+        document.getElementById('wallet-info').style.display = 'none';
+        showNotification('👋 Wallet disconnected', 'info');
+    }
+
+    // === TEST TRANSACTION ===
+    async function testRealTransaction() {
+        const userAddress = document.getElementById('user-address').textContent;
+        
+        if (userAddress.includes('(Demo)') || userAddress === 'ST3XE7...Q7WA') {
+            showNotification('❌ Please connect REAL wallet first', 'error');
+            showMobileHelp();
+            return;
+        }
+        
+        showNotification('🚀 This would execute a real transaction!', 'success');
+    }
+
+    // === MOBILE HELP ===
+    function showMobileHelp() {
+        const helpText = `🎯 REAL MOBILE CONNECTION GUIDE:
 
 1. ✅ REQUIRED: Install Leather Wallet Mobile App
-2. 🔗 CONNECTION METHODS:
-   
-   OPTION A (Recommended):
+2. 🔗 CONNECTION:
    • Open Leather Wallet App
    • Go to "Browser" tab  
-   • Enter: https://sureways739-art.github.io/Cargoconnect-escrow/
+   • Enter your website URL
    • Click "Connect Wallet"
-
-   OPTION B (Alternative):
-   • Open your website in normal mobile browser
-   • Click "Connect Wallet" 
-   • It should open Leather Wallet automatically
 
 3. 💰 EXPECTED RESULTS:
    • Should show YOUR real address (not ST3XE7...)
    • Should show YOUR real balance (not 500.00)
-   • Status should NOT say "(Demo)"
+   • Status should NOT say "(Demo)"`;
 
-Troubleshooting:
-• Ensure Leather Wallet has accounts
-• Make sure you're on Testnet in wallet
-• Try refreshing the page after connection`;
-
-    alert(helpText);
-}
-
-// === INITIALIZE ON LOAD ===
-document.addEventListener('DOMContentLoaded', function() {
-    showNotification('Welcome to Sureway Logistics! Connect your Leather Wallet.', 'info');
-    
-    // Check for wallet on load
-    if (typeof window.StacksConnect !== 'undefined' || typeof window.LeatherProvider !== 'undefined') {
-        showNotification('👛 Wallet detected! Click "Connect Wallet"', 'info');
+        alert(helpText);
     }
-});
-</script>
+
+    // === NOTIFICATION SYSTEM ===
+    function showNotification(message, type) {
+        const notification = document.getElementById('notification');
+        const text = document.getElementById('notification-text');
+        
+        notification.className = `notification ${type}`;
+        text.textContent = message;
+        
+        setTimeout(() => notification.classList.add('show'), 100);
+        setTimeout(() => notification.classList.remove('show'), 5000);
+    }
+
+    // === DASHBOARD FUNCTIONS ===
+    function showDashboard() {
+        showNotification('🏠 Dashboard loaded successfully', 'info');
+    }
+
+    function showAbout() {
+        showNotification('🚀 Sureway Logistics - Transforming African supply chains with blockchain technology', 'info');
+    }
+
+    function showContact() {
+        showNotification('📞 Contact us: sureway@logistics.com • +234 XXX XXX XXXX', 'info');
+    }
+
+    function switchTab(tabName) {
+        document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        
+        event.target.classList.add('active');
+        document.getElementById(`${tabName}-tab`).classList.add('active');
+    }
+
+    function createShipment() {
+        const origin = document.getElementById('origin').value;
+        const destination = document.getElementById('destination').value;
+        const value = document.getElementById('cargo-value').value;
+        
+        if (!origin || !destination || !value) {
+            showNotification('❌ Please fill all fields', 'error');
+            return;
+        }
+        
+        showNotification(`✅ Shipment created: ${origin} → ${destination} (${value} STX)`, 'success');
+        document.getElementById('origin').value = '';
+        document.getElementById('destination').value = '';
+        document.getElementById('cargo-value').value = '';
+    }
+
+    // === INITIALIZE ===
+    document.addEventListener('DOMContentLoaded', function() {
+        showNotification('Welcome to Sureway Logistics! Connect your Leather Wallet.', 'info');
+        
+        if (typeof window.StacksConnect !== 'undefined' || typeof window.LeatherProvider !== 'undefined') {
+            showNotification('👛 Wallet detected! Click "Connect Wallet"', 'info');
+        }
+    });
+    </script>
 </body>
 </html>
